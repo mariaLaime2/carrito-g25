@@ -1,29 +1,29 @@
-//* URL Base
+// URL Base
 const baseUrl = "https://ecommercebackend.fundamentos-29.repl.co/"
-//* Mostrar y ocultar carrito
-const carToggle = document.querySelector(".car__toggle");
-const carBlock = document.querySelector(".car__block");
-//* Dibujar productos en la web
+// Mostrar y ocultar carrito
+const carToggle = document.querySelector(".cart__toggle");
+const cartBlock = document.querySelector(".cart__block");
+// Dibujar productos en la web
 const productsList = document.querySelector("#products-container")
-//*carrito de compras
+//carrito de compras
 const car = document.querySelector("#car");
 const carList = document.querySelector("#car__list");
-//*Vaciar el carrito
+//Vaciar el carrito
 emptyCartButton = document.querySelector("#empty__cart")
-//*Array para recibir los elementos a introducir en el carrito de compras
+//Array para recibir los elementos a introducir en el carrito de compras
 let carProducts=[];
-//*Modal
+//Modal
 const modalContainer= document.querySelector("#modal-container")
 const modalElement= document.querySelector("#modal")
 let detailsModal= [];
 
-//*Logica para mostrar y ocultar el carrito
+//Logica para mostrar y ocultar el carrito
 carToggle.addEventListener("click", () => {
-    carBlock.classList.toggle("nav__car__visible")
+    cartBlock.classList.toggle("nav__car__visible")
 })
 eventListenersLoader()
 function eventListenersLoader(){
-    //* cuando se presione el boton "Add to car ""
+    // cuando se presione el boton "Add to car ""
     productsList.addEventListener("click",addProduct)
     //Cuando se presione el boton "delete"
     car.addEventListener("click",deleteProduct)
@@ -34,7 +34,6 @@ function eventListenersLoader(){
         carProducts= JSON.parse(localStorage.getItem("cart")) || []
         carElementsHTML()
     } )
-    
     //Cuando se presiona el boton view details
     productsList.addEventListener("click" , modal)
     //Cuando se presione sobre el icono para cerrar modal
@@ -79,7 +78,7 @@ function printProducts(products){
     }
     productsList.innerHTML = html
 }
-//*Agregar productos al carrito
+//Agregar productos al carrito
 function addProduct(event){
     if (event.target.classList.contains("add__to__car")) {
         const product = event.target.parentElement.parentElement
@@ -111,7 +110,7 @@ function carProductsElements(product){
     console.log(carProducts)
     carElementsHTML()
 }
-//* Productos del carrito mostrados en pantalla
+// Productos del carrito mostrados en pantalla
 function carElementsHTML(){
     carList.innerHTML= "";
     carProducts.forEach(product => {
@@ -138,12 +137,11 @@ function carElementsHTML(){
     })
     productStorage()
 }
-//*localStorage
+//localStorage
 function productStorage() {
     localStorage.setItem("cart", JSON.stringify(carProducts))
 }
-
-//*Eliminar productos del carrito
+//Eliminar productos del carrito
 function deleteProduct(event){
     if(event.target.classList.contains("delete__product")){
         const productId = event.target.getAttribute("data-id")
@@ -177,12 +175,10 @@ function modalDetails(product){
         image: product.querySelector("img").src,
         name: product.querySelector(".product__container__name p").textContent,
         price: product.querySelector(".product__container__price p").textContent,
-    
     }]
     detailsModal = [...infoDetailsModal]
     console.log(detailsModal)
     modalElementsHTML()
-    
 }  
 //Producto mostrado en la ventna modal
 function modalElementsHTML(){
@@ -211,14 +207,3 @@ function modalElementsHTML(){
       modalElement.appendChild(div)  
     })
 }
-/*/Local Storage
-//guardando informcaion en el local Storage
-localStorage.setItem("apellido","Laime")
-//console.log(localStorege.getItem("apellido"))
-const usuario = {
-    name:"Maria",
-    age:31
-}
-localStorage.setItem("usuario" , JSON.stringify(usuario))
-const usuarioLocal= localStorage.getItem("usuario")
-console.log(JSON.parse(usuarioLocal))*/
